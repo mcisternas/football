@@ -13,6 +13,7 @@ import sklearn.linear_model
 import sklearn.neural_network
 import sklearn.pipeline
 import sklearn.ensemble
+import sklearn.naive_bayes
 
 import docopt
 import matplotlib.pyplot as plt
@@ -24,10 +25,11 @@ datafile = "data/England/E0_1115_feats.csv"
 test_size = 0.3
 
 classifiers = {
-    'Logistic Regression': sklearn.linear_model.LogisticRegression(),
+    'Logistic Regression': sklearn.linear_model.LogisticRegression(C=0.1),#, class_weight='auto'),
     #'Random Forests': sklearn.ensemble.RandomForestClassifier(n_estimators=100, n_jobs=1),
     #'SVC': sklearn.svm.SVC(C=1.0, probability=True),
-    'Gradient Boosting': sklearn.ensemble.GradientBoostingClassifier(n_estimators=100, learning_rate=0.1, max_depth=3),
+    #'Gradient Boosting': sklearn.ensemble.GradientBoostingClassifier(n_estimators=100, learning_rate=0.1, max_depth=3),
+    'Naive Bayes': sklearn.naive_bayes.GaussianNB()
 }
 
 
@@ -38,7 +40,7 @@ def run_benchmark(classifiers): #, classifiers_gridparameters):
 
     #split data, X/y train/test
     X, y = datasetup.split_df_labels_features(df)
-    X_train, y_train, X_test, y_test = datasetup.get_stratified_data(X, y, 0.25)
+    X_train, y_train, X_test, y_test = datasetup.get_stratified_data(X, y, test_size)
 
     #for loop, iterate over classifiers
     for clf_name, clf_notoptimized in classifiers.iteritems():

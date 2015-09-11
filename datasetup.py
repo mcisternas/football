@@ -29,7 +29,7 @@ def split_df_labels_features(df):
     #TODO: also split and return id/index, to later do odds comaprison
     y = df['FTR']
     X = df.iloc[:, 5:]  # skip team names and goals
-    print X.head()
+    #print X.head()
     return X.values, y.values
 
 
