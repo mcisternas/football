@@ -32,6 +32,13 @@ def split_df_labels_features(df):
     #print X.head()
     return X.values, y.values
 
+def scale_features(X):
+    """ Performes a Min Max scaling between 0 and 1
+    :param X:
+    :return: X_scaled
+    """
+    X_scaled = sklearn.preprocessing.MinMaxScaler().fit_transform(X.astype(float))
+    return X_scaled
 
 def get_stratified_data(X, y, test_size):
     """ Splits the data into a training set and test set as defined in config
