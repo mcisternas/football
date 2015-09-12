@@ -21,15 +21,16 @@ import matplotlib.pyplot as plt
 import datasetup
 
 #Config params- consider moving it to a config file
-datafile = "data/England/E0_1015_feats.csv"
+datafile = "data/England/E0_0815_feats.csv"
 test_size = 0.3
 
 classifiers = {
-    'Logistic Regression': sklearn.linear_model.LogisticRegression(C=0.1),#, class_weight='auto'),
+    'Logistic Regression': sklearn.linear_model.LogisticRegression(C=10),#, class_weight='auto'),
     #'Random Forests': sklearn.ensemble.RandomForestClassifier(n_estimators=100, n_jobs=1),
     #'SVC': sklearn.svm.SVC(C=1.0, probability=True),
     'Gradient Boosting': sklearn.ensemble.GradientBoostingClassifier(n_estimators=100, learning_rate=0.1, max_depth=3),
-    'Naive Bayes': sklearn.naive_bayes.GaussianNB()
+    'Naive Bayes - Gaussian': sklearn.naive_bayes.GaussianNB(),
+    #'Naive Bayes - Multinomial': sklearn.naive_bayes.MultinomialNB(),
 }
 
 
